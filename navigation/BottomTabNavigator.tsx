@@ -5,9 +5,13 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
+import FavouriteScreen from '../screens/FavouriteScreen';
+import MyAdsScreen from '../screens/MyAdsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import RentScreen from '../screens/RentScreen';
+
+import { BottomTabParamList, HomeParamList, FavouritesParamList,RentParamList,MyAdsParamList,SettingsParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,18 +20,39 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Home"
+        component={HomeTabNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Favourites"
+        component={FavouritesTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Rent"
+        component={RentTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="MyAds"
+        component={MyAdsTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
+        component={SettingsTabNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
@@ -44,30 +69,70 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const HomeStack = createStackNavigator<HomeParamList>();
 
-function TabOneNavigator() {
+function HomeTabNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerTitle: 'Home' }}
       />
-    </TabOneStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const FavouritesTabStack = createStackNavigator<FavouritesParamList>();
 
-function TabTwoNavigator() {
+function FavouritesTabNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <FavouritesTabStack.Navigator>
+      <FavouritesTabStack.Screen
+        name="FavouritesScreen"
+        component={FavouriteScreen}
+        options={{ headerTitle: 'Favourite listings' }}
       />
-    </TabTwoStack.Navigator>
+    </FavouritesTabStack.Navigator>
+  );
+}
+
+const RentTabStack = createStackNavigator<RentParamList>();
+function RentTabNavigator() {
+  return (
+    <RentTabStack.Navigator>
+      <RentTabStack.Screen
+        name="RentScreen"
+        component={RentScreen}
+        options={{ headerTitle: 'Rent' }}
+      />
+    </RentTabStack.Navigator>
+  );
+}
+
+const MyAdsTabStack = createStackNavigator<MyAdsParamList>();
+function MyAdsTabNavigator() {
+  return (
+    <MyAdsTabStack.Navigator>
+      <MyAdsTabStack.Screen
+        name="MyAdsScreen"
+        component={MyAdsScreen}
+        options={{ headerTitle: 'My Ads' }}
+      />
+    </MyAdsTabStack.Navigator>
+  );
+}
+
+
+const SettingsTabStack = createStackNavigator<SettingsParamList>();
+function SettingsTabNavigator() {
+  return (
+    <SettingsTabStack.Navigator>
+      <SettingsTabStack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{ headerTitle: 'Settings' }}
+      />
+    </SettingsTabStack.Navigator>
   );
 }

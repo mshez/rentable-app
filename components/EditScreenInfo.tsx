@@ -1,11 +1,18 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity} from 'react-native';
+
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
+
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
-
+const users = [
+  {
+    name: 'brynn',
+    avatar: 'https://assets-rentable.sgp1.digitaloceanspaces.com/rentablepk/images/p2csX4KNVgydyExHVFk7MOl0dlAUzoNbLoSCeCss.jpeg'
+  }]
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View>
@@ -39,6 +46,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
           </Text>
         </TouchableOpacity>
       </View>
+
     </View>
   );
 }
