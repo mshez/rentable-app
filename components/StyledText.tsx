@@ -2,6 +2,6 @@ import * as React from 'react';
 
 import { Text, TextProps } from './Themed';
 
-export function MonoText(props: TextProps) {
-  return <Text {...props} style={[props.style, { fontFamily: 'space-mono' }]} />;
+export default function MonoText({ style, ...otherProps }: TextProps) {
+  return <Text {...otherProps} style={[style, { fontFamily: 'Quicksand' }]} />;
 }

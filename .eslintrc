@@ -1,0 +1,57 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb", "prettier", "prettier/babel", "prettier/react",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "react-hooks","@typescript-eslint"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx",".ts",".tsx"],
+        "paths": ["."]
+      }
+    }
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "global-require": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react/jsx-filename-extension": "off",
+    "react/self-closing-comp": "warn",
+    "no-return-await": "off",
+    "camelcase": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "warn",
+    "import/extensions": "off",
+    "no-unused-vars": "off",
+    "react/require-default-props": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn"
+    ]
+  }
+}

@@ -73,9 +73,9 @@ const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeTabNavigator() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator headerMode="float">
       <HomeStack.Screen
-        name="HomeScreen"
+        name="HomeScreen"        
         component={HomeScreen}
         options={{ headerTitle: 'Home' }}
       />
