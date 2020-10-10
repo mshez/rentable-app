@@ -1,48 +1,112 @@
 import React from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
-import { Card, Button, Icon } from 'react-native-elements';
+import { formatDistanceStrict } from 'date-fns';
+import { Tile } from 'react-native-elements';
+import SkeletonContent from 'react-native-skeleton-content';
+
 import Colors from '../../../constants/Colors';
 import { IListing } from '../../../interface';
-import Text from '../../StyledText';
+import { View, Text } from '../../Themed';
 
 interface Props {
-  listing: IListing;
+  listing?: IListing;
+  style?: object;
+  loading?: boolean;
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: 200,
-    borderRadius: 5,
-    padding: 0,
-    borderColor: '#000',
+  MainContainer: {
+    marginRight: 10,
+    overflow: 'hidden',
   },
-  image: {
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+  tileBottom: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  address: {
+    maxWidth: '50%',
+    overflow: 'hidden',
+    fontSize: 10,
+  },
+  date: {
+    fontSize: 10,
+  },
+  listingTitle: {
+    marginBottom: 5,
+  },
+  skeletonContainer: {
+    marginRight: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  imageContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
-export default function AdCard({ listing }: Props) {
+const firstLayout = [
+  {
+    width: 150,
+    height: 100,
+    marginBottom: 5,
+  },
+];
+const secondLayout = [
+  {
+    width: 150,
+    height: 15,
+    marginBottom: 5,
+  },
+];
+export default function AdCard({ listing, style, loading }: Props) {
   const theme = useColorScheme();
+  const isDark = theme === 'dark';
+  if (loading) {
+    return (
+      <View style={styles.skeletonContainer}>
+        <SkeletonContent layout={firstLayout} isLoading />
+        <SkeletonContent layout={secondLayout} isLoading />
+        <SkeletonContent layout={secondLayout} isLoading />
+      </View>
+    );
+  }
   return (
-    <Card
-      containerStyle={[
-        styles.container,
-        {
-          backgroundColor: (theme === 'dark' && Colors.dark.background) || Colors.light.background,
-        },
-      ]}
-    >
-      {/* <Card.Divider /> */}
-      <Card.Image style={styles.image} source={{ uri: listing.images[0] }} />
-      {/* <Text style={{ marginBottom: 10 }}>{listing.short_description}</Text> */}
-      {/* <Button
-        icon={<Icon name="code" color="#ffffff" />}
-        buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-        title="View details"
-      /> */}
-      <Card.Title>
-        <Text style={{ fontWeight: '300' }}>{listing.title}</Text>
-      </Card.Title>
-    </Card>
+    <View style={[styles.MainContainer, style]}>
+      <Tile
+        imageSrc={{ uri: listing?.images[0] }}
+        titleStyle={{
+          fontSize: 15,
+          fontFamily: 'Quicksand',
+          color: (isDark && Colors.light.background) || Colors.dark.background,
+        }}
+        title={`Rs.${listing?.attributes.expected_price.toString()} / ${
+          listing?.attributes.rent_per
+        }`}
+        contentContainerStyle={{ height: 80, width: 180 }}
+        containerStyle={{ borderColor: '#a4a4a4', borderWidth: 1, borderRadius: 5 }}
+        imageContainerStyle={{ borderTopLeftRadius: 5, borderTopEndRadius: 5 }}
+        width={180}
+        height={180}
+      >
+        <View style={styles.listingTitle}>
+          <Text>{listing?.title}</Text>
+        </View>
+        <View style={styles.tileBottom}>
+          <Text numberOfLines={1} style={styles.address}>
+            {listing?.location.address}
+          </Text>
+          <Text style={styles.date}>
+            {formatDistanceStrict(new Date(listing?.created_at || ''), new Date(), {
+              addSuffix: true,
+            })}
+          </Text>
+        </View>
+      </Tile>
+    </View>
   );
 }

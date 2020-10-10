@@ -1,70 +1,33 @@
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
+import ViewAllScreen from '../screens/Home/ViewAllScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RentScreen from '../screens/RentScreen';
 
-import { BottomTabParamList, HomeParamList, FavouritesParamList,RentParamList,MyAdsParamList,SettingsParamList } from '../types';
-
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
-
-export default function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
-      <BottomTab.Screen
-        name="Home"
-        component={HomeTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Favourites"
-        component={FavouritesTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Rent"
-        component={RentTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="MyAds"
-        component={MyAdsTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Settings"
-        component={SettingsTabNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-    </BottomTab.Navigator>
-  );
-}
+import {
+  BottomTabParamList,
+  HomeParamList,
+  FavouritesParamList,
+  RentParamList,
+  MyAdsParamList,
+  SettingsParamList,
+} from '../types';
+import { RouteProp } from '@react-navigation/native';
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+}
+function TabBarAntDesignIcon(props: { name: string; color: string }) {
+  return <AntDesign size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -75,9 +38,14 @@ function HomeTabNavigator() {
   return (
     <HomeStack.Navigator headerMode="float">
       <HomeStack.Screen
-        name="HomeScreen"        
+        name="HomeScreen"
         component={HomeScreen}
         options={{ headerTitle: 'Home' }}
+      />
+      <HomeStack.Screen
+        name="ViewAllScreen"
+        component={ViewAllScreen}
+        options={({ route }: any) => ({ headerTitle: route?.params?.name || '' })}
       />
     </HomeStack.Navigator>
   );
@@ -123,7 +91,6 @@ function MyAdsTabNavigator() {
   );
 }
 
-
 const SettingsTabStack = createStackNavigator<SettingsParamList>();
 function SettingsTabNavigator() {
   return (
@@ -134,5 +101,54 @@ function SettingsTabNavigator() {
         options={{ headerTitle: 'Settings' }}
       />
     </SettingsTabStack.Navigator>
+  );
+}
+
+const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+
+export default function BottomTabNavigator() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
+      <BottomTab.Screen
+        name="Home"
+        component={HomeTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarAntDesignIcon name="home" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Favourites"
+        component={FavouritesTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarAntDesignIcon name="hearto" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Rent"
+        component={RentTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarAntDesignIcon name="pluscircleo" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="MyAds"
+        component={MyAdsTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarAntDesignIcon name="profile" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
+        component={SettingsTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarAntDesignIcon name="setting" color={color} />,
+        }}
+      />
+    </BottomTab.Navigator>
   );
 }
