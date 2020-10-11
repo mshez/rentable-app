@@ -1,3 +1,3 @@
 export default {
-  apiUrl: 'https://dev.api.rentable.pk/api/v1',
+  apiUrl: 'https://api.rentable.pk/api/v1',
 };

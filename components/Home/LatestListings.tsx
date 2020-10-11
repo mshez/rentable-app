@@ -10,9 +10,7 @@ export default function LatestListings() {
     <ListingSection
       listings={listings}
       sectionTitle="Latest listings"
-      viewMoreHandler={() =>
-        navigation.navigate('ViewAllScreen', { name: 'All Latest listings', listings })
-      }
+      viewMoreHandler={() => navigation.navigate('AllLatestScreen')}
     />
   );
 }

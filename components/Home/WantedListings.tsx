@@ -10,9 +10,7 @@ export default function WantedListings() {
     <ListingSection
       listings={listings}
       sectionTitle="Wanted listings"
-      viewMoreHandler={() =>
-        navigation.navigate('ViewAllScreen', { name: 'All Wanted listings', listings })
-      }
+      viewMoreHandler={() => navigation.navigate('AllWantedScreen')}
     />
   );
 }

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
-import useGetLatestListings from '../../hooks/api/listings/useGetLatestListings';
 import { IListing } from '../../interface';
 import AdCard from '../../components/Common/AdCard';
-import { View, Text } from '../../components/Themed';
-import { useRoute } from '@react-navigation/native';
+import { View } from '../../components/Themed';
+import useGetFeaturedListings from '../../hooks/api/listings/useGetFeaturedListings';
 
 const styles = StyleSheet.create({
   title: {
@@ -35,8 +34,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ViewAll() {
-  const route = useRoute();
+export default function AllFeaturedListingsScreen() {
+  const { listings, isLoading, setPage } = useGetFeaturedListings();
 
   const renderItem = ({ item }: { item: IListing }) => (
     <AdCard listing={item} style={{ marginRight: 5, marginBottom: 5 }} />
@@ -45,12 +44,20 @@ export default function ViewAll() {
   return (
     <View style={styles.section}>
       <FlatList
+        initialNumToRender={8}
         showsVerticalScrollIndicator={false}
         numColumns={2}
-        columnWrapperStyle={{}}
-        data={route.params?.listings?.data || {}}
+        data={listings}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.uuid}
+        onEndReachedThreshold={0.01}
+        onEndReached={() => {
+          setPage((p) => p + 1);
+        }}
+        onRefresh={() => {
+          setPage(1);
+        }}
+        refreshing={isLoading}
       />
     </View>
   );

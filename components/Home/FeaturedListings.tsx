@@ -11,9 +11,7 @@ export default function FeaturedListings() {
     <ListingSection
       listings={listings}
       sectionTitle="Featured listings"
-      viewMoreHandler={() =>
-        navigation.navigate('ViewAllScreen', { name: 'All Featured listings', listings })
-      }
+      viewMoreHandler={() => navigation.navigate('AllFeaturedScreen')}
     />
   );
 }
