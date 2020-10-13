@@ -24,7 +24,7 @@ const useGetLatestListings = () => {
   // const fetchUrl =
   //   (isAuthenticated && [`${baseUrl}/listings`, auth?.token]) || `${baseUrl}/listings`;
   const fetchUrl = `${baseUrl}/listings?page=${page}`;
-  const { data: result } = useQuery<IListings>(fetchUrl, fetcher);
+  const { data: result, refetch } = useQuery<IListings>(fetchUrl, fetcher);
 
   const [listings, setListings] = useState<IListing[]>([]);
 
@@ -38,7 +38,7 @@ const useGetLatestListings = () => {
     }
   }, [result, page]);
   const canViewMore = (result && result.last_page > page) || false;
-  return { listings, isLoading: !result, page, setPage, canViewMore };
+  return { listings, isLoading: !result, page, setPage, canViewMore, refetch };
 };
 
 export default useGetLatestListings;

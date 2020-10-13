@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, FlatList, useColorScheme } from 'react-native';
+import { StyleSheet, FlatList, useColorScheme, TouchableOpacity } from 'react-native';
 import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import useGetTrendingCategories from '../../hooks/api/categories/useGetTrendingCategories';
 import { View, Text } from '../Themed';
 import { ICategory } from '../../interface';
 import Colors from '../../constants/Colors';
+import useGetAllCategories from '../../hooks/api/categories/useGetAllCategories';
 
 const styles = StyleSheet.create({
   title: {
@@ -16,9 +17,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   item: {
-    // backgroundColor: '#f9c2ff',
-    // padding: 20,
-    // marginVertical: 8,
     marginHorizontal: 5,
     width: 150,
     height: 100,
@@ -47,10 +45,10 @@ const renderCategoryIcon = (id: number, isDark: boolean): React.ReactElement | n
     return <AntDesign name="car" size={24} color={(isDark && 'white') || 'black'} />;
   }
   if (id === 21) {
-    return <AntDesign name="car" size={24} color={(isDark && 'white') || 'black'} />;
+    return <AntDesign name="woman" size={24} color={(isDark && 'white') || 'black'} />;
   }
   if (id === 1) {
-    return <AntDesign name="car" size={24} color={(isDark && 'white') || 'black'} />;
+    return <AntDesign name="mobile1" size={24} color={(isDark && 'white') || 'black'} />;
   }
   if (id === 29) {
     return <FontAwesome5 name="building" size={24} color={(isDark && 'white') || 'black'} />;
@@ -60,9 +58,11 @@ const renderCategoryIcon = (id: number, isDark: boolean): React.ReactElement | n
 
 const CategoryItem = ({ category }: { category: ICategory }) => {
   const theme = useColorScheme();
+  const { navigate } = useNavigation();
   const isDark = theme === 'dark';
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => navigate('ChildCategoryScreen', { name: category.name, slug: category.slug })}
       style={[
         {
           borderWidth: 1,
@@ -73,12 +73,12 @@ const CategoryItem = ({ category }: { category: ICategory }) => {
     >
       {renderCategoryIcon(category.id, isDark)}
       <Text style={{ marginTop: 10, textAlign: 'center' }}>{category.name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 export default function Categories() {
-  const { categories, isLoading } = useGetTrendingCategories();
+  const { categories, isLoading } = useGetAllCategories();
 
   const renderItem = ({ item }: { item: ICategory }) => {
     return <CategoryItem category={item} />;

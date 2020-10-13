@@ -16,6 +16,7 @@ export type HomeParamList = {
   AllLatestScreen: undefined;
   AllFeaturedScreen: undefined;
   AllWantedScreen: undefined;
+  ChildCategoryScreen: undefined;
 };
 
 export type TabTwoParamList = {

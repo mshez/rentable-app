@@ -25,7 +25,7 @@ const useGetFeaturedListings = () => {
   //   (isAuthenticated && [`${baseUrl}/listings/featured`, auth?.token]) ||
   //   `${baseUrl}/listings/featured`;
   const fetchUrl = `${baseUrl}/listings/featured?page=${page}`;
-  const { data: result } = useQuery<IListings>(fetchUrl, fetcher);
+  const { data: result, refetch } = useQuery<IListings>(fetchUrl, fetcher);
 
   const [listings, setListings] = useState<IListing[]>([]);
 
@@ -40,7 +40,7 @@ const useGetFeaturedListings = () => {
   }, [result, page]);
   const canViewMore = (result && result.last_page > page) || false;
 
-  return { listings, isLoading: !result, page, setPage, canViewMore };
+  return { listings, isLoading: !result, page, setPage, canViewMore, refetch };
 };
 
 export default useGetFeaturedListings;

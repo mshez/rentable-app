@@ -1,8 +1,9 @@
 import { useQuery } from 'react-query';
 import { ICategory } from '../../../interface';
 import client from '../../../utils/axios';
+import config from '../../../utils/config';
 
-const apiUrl = 'https://dev.api.rentable.pk/api/v1/trending-categories';
+const apiUrl = `${config.apiUrl}/trending-categories`;
 
 export const fetcher = (url: string) =>
   client

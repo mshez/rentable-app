@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import useGetLatestListings from '../../hooks/api/listings/useGetLatestListings';
+import { IListing } from '../../interface';
 import ListingSection from './components/ListingSection';
 
-export default function LatestListings() {
-  const { listings } = useGetLatestListings();
+type LatestListings = {
+  listings: IListing[] | null;
+};
+export default function LatestListings({ listings }: LatestListings) {
   const navigation = useNavigation();
   return (
     <ListingSection

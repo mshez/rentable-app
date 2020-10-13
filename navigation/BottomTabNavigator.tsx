@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import AllLatestScreen from '../screens/Home/AllLatestScreen';
 import AllFeaturedScreen from '../screens/Home/AllFeaturedScreen';
 import AllWantedScreen from '../screens/Home/AllWantedScreen';
+import ChildCategoryScreen from '../screens/Category/ChildCategoryScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -57,6 +58,11 @@ function HomeTabNavigator() {
         name="AllWantedScreen"
         component={AllWantedScreen}
         options={{ headerTitle: 'Wanted listings' }}
+      />
+      <HomeStack.Screen
+        name="ChildCategoryScreen"
+        component={ChildCategoryScreen}
+        options={({ route }: any) => ({ headerTitle: route?.params?.name || '' })}
       />
     </HomeStack.Navigator>
   );

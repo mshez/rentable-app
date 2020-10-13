@@ -1,11 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
-import useGetFeaturedListings from '../../hooks/api/listings/useGetFeaturedListings';
+import { IListing } from '../../interface';
 import ListingSection from './components/ListingSection';
 
-export default function FeaturedListings() {
-  const { listings } = useGetFeaturedListings();
+type FeaturedListings = {
+  listings: IListing[] | null;
+};
+export default function FeaturedListings({ listings }: FeaturedListings) {
   const navigation = useNavigation();
   return (
     <ListingSection
