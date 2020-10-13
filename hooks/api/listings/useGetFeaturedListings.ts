@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import client from '../../../utils/axios';
 import config from '../../../utils/config';
-import { IListings } from '../../../interface';
+import { IListing, IListings } from '../../../interface';
 // import { useAuthState } from '../../../contexts/auth/auth.context';
 
 const fetcher = async (url: string, token: string | undefined) => {
@@ -18,24 +18,29 @@ const fetcher = async (url: string, token: string | undefined) => {
 const baseUrl = `${config.apiUrl}`;
 
 const useGetFeaturedListings = () => {
-  // const [size, setSize] = useState(4);
+  const [page, setPage] = useState(1);
   // const authState = useAuthState();
   // const { isAuthenticated, auth } = authState;
   // const fetchUrl =
   //   (isAuthenticated && [`${baseUrl}/listings/featured`, auth?.token]) ||
   //   `${baseUrl}/listings/featured`;
-  const fetchUrl = `${baseUrl}/listings/featured`;
-  const { data: result } = useQuery<IListings>(fetchUrl, fetcher);
+  const fetchUrl = `${baseUrl}/listings/featured?page=${page}`;
+  const { data: result, refetch } = useQuery<IListings>(fetchUrl, fetcher);
 
-  const [listings, setListings] = useState<IListings | null>(null);
+  const [listings, setListings] = useState<IListing[]>([]);
 
   useEffect(() => {
     if (result) {
-      setListings(result);
+      if (page > 1) {
+        setListings((list) => list.concat(result.data));
+      } else {
+        setListings(result.data);
+      }
     }
-  }, [result]);
-  // const canViewMore = (listings && listings?.total > size) || false;
-  return { listings, isLoading: !result };
+  }, [result, page]);
+  const canViewMore = (result && result.last_page > page) || false;
+
+  return { listings, isLoading: !result, page, setPage, canViewMore, refetch };
 };
 
 export default useGetFeaturedListings;

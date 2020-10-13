@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 });
 type ListingSection = {
   sectionTitle: string;
-  listings: IListings | null;
+  listings: IListing[] | null;
   viewMoreHandler: () => void;
 };
 export default function ListingSection({
@@ -53,7 +53,7 @@ export default function ListingSection({
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal
-        data={listings?.data}
+        data={listings}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         ListEmptyComponent={() => {

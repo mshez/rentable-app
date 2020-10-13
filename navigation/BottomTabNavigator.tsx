@@ -5,7 +5,10 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
-import ViewAllScreen from '../screens/Home/ViewAllScreen';
+import AllLatestScreen from '../screens/Home/AllLatestScreen';
+import AllFeaturedScreen from '../screens/Home/AllFeaturedScreen';
+import AllWantedScreen from '../screens/Home/AllWantedScreen';
+import ChildCategoryScreen from '../screens/Category/ChildCategoryScreen';
 import FavouriteScreen from '../screens/FavouriteScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -19,7 +22,6 @@ import {
   MyAdsParamList,
   SettingsParamList,
 } from '../types';
-import { RouteProp } from '@react-navigation/native';
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
@@ -43,8 +45,23 @@ function HomeTabNavigator() {
         options={{ headerTitle: 'Home' }}
       />
       <HomeStack.Screen
-        name="ViewAllScreen"
-        component={ViewAllScreen}
+        name="AllFeaturedScreen"
+        component={AllFeaturedScreen}
+        options={{ headerTitle: 'Featured listings' }}
+      />
+      <HomeStack.Screen
+        name="AllLatestScreen"
+        component={AllLatestScreen}
+        options={{ headerTitle: 'Latest listings' }}
+      />
+      <HomeStack.Screen
+        name="AllWantedScreen"
+        component={AllWantedScreen}
+        options={{ headerTitle: 'Wanted listings' }}
+      />
+      <HomeStack.Screen
+        name="ChildCategoryScreen"
+        component={ChildCategoryScreen}
         options={({ route }: any) => ({ headerTitle: route?.params?.name || '' })}
       />
     </HomeStack.Navigator>
