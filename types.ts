@@ -13,7 +13,10 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
-  ViewAllScreen: undefined;
+  AllLatestScreen: undefined;
+  AllFeaturedScreen: undefined;
+  AllWantedScreen: undefined;
+  ChildCategoryScreen: undefined;
 };
 
 export type TabTwoParamList = {
