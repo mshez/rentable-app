@@ -67,6 +67,7 @@ const CategoryItem = ({ category }: { category: ICategory }) => {
         {
           borderWidth: 1,
           borderColor: (isDark && Colors.light.background) || Colors.dark.background,
+          borderRadius: 3,
         },
         styles.item,
       ]}

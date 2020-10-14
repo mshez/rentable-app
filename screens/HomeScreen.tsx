@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
 
   separator: {
@@ -38,6 +39,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={[styles.container]}>
       <ScrollView
+        style={{ width: '100%' }}
         showsVerticalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       >

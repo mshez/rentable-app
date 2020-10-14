@@ -2,6 +2,8 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { SearchBar } from 'react-native-elements';
+
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
@@ -22,6 +24,7 @@ import {
   MyAdsParamList,
   SettingsParamList,
 } from '../types';
+import { Text, View } from '../components/Themed';
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
@@ -29,7 +32,7 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 function TabBarAntDesignIcon(props: { name: string; color: string }) {
-  return <AntDesign size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <AntDesign size={20} style={{ marginBottom: -4 }} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -37,12 +40,26 @@ function TabBarAntDesignIcon(props: { name: string; color: string }) {
 const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeTabNavigator() {
+  const [searchText, setSearchText] = React.useState('');
   return (
     <HomeStack.Navigator headerMode="float">
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Home' }}
+        options={{
+          header: ({ scene, previous, navigation }) => {
+            const { options } = scene.descriptor;
+            return (
+              <SearchBar
+                // style={options.headerStyle}
+                placeholder="Type Here..."
+                onChangeText={(search) => setSearchText(search)}
+                value={searchText}
+              />
+            );
+          },
+          headerTitle: 'Home',
+        }}
       />
       <HomeStack.Screen
         name="AllFeaturedScreen"

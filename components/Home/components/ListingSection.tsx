@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-import { IListing, IListings } from '../../../interface';
+import { Button } from 'react-native-elements';
+
+import { IListing } from '../../../interface';
 import AdCard from '../../Common/AdCard';
 import { View, Text } from '../../Themed';
 
@@ -48,7 +50,12 @@ export default function ListingSection({
     <View style={styles.section}>
       <View style={styles.sectionHeader}>
         <Text style={styles.title}>{sectionTitle}</Text>
-        <Text onPress={viewMoreHandler}>View more</Text>
+        <Button
+          onPress={viewMoreHandler}
+          title="view more"
+          titleStyle={{ fontFamily: 'Quicksand', fontSize: 13 }}
+          buttonStyle={{ padding: 5 }}
+        />
       </View>
       <FlatList
         showsHorizontalScrollIndicator={false}
@@ -59,6 +66,7 @@ export default function ListingSection({
         ListEmptyComponent={() => {
           return (
             <>
+              <AdCard loading />
               <AdCard loading />
               <AdCard loading />
             </>
