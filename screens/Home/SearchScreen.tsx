@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../../components/Themed';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,12 +19,11 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
-
-export default function RentScreen() {
+export default function SearchScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Rent Screen</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Favourite listings screen</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-    </View>
+    </SafeAreaView>
   );
 }

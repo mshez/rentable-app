@@ -1,4 +1,4 @@
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -15,6 +15,7 @@ import FavouriteScreen from '../screens/FavouriteScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RentScreen from '../screens/RentScreen';
+import SearchScreen from '../screens/Home/SearchScreen';
 
 import {
   BottomTabParamList,
@@ -24,13 +25,12 @@ import {
   MyAdsParamList,
   SettingsParamList,
 } from '../types';
-import { Text, View } from '../components/Themed';
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-}
+// function TabBarIcon(props: { name: string; color: string }) {
+//   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+// }
 function TabBarAntDesignIcon(props: { name: string; color: string }) {
   return <AntDesign size={20} style={{ marginBottom: -4 }} {...props} />;
 }
@@ -40,27 +40,9 @@ function TabBarAntDesignIcon(props: { name: string; color: string }) {
 const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeTabNavigator() {
-  const [searchText, setSearchText] = React.useState('');
   return (
-    <HomeStack.Navigator headerMode="float">
-      <HomeStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          header: ({ scene, previous, navigation }) => {
-            const { options } = scene.descriptor;
-            return (
-              <SearchBar
-                // style={options.headerStyle}
-                placeholder="Type Here..."
-                onChangeText={(search) => setSearchText(search)}
-                value={searchText}
-              />
-            );
-          },
-          headerTitle: 'Home',
-        }}
-      />
+    <HomeStack.Navigator headerMode="none">
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} options={{}} />
       <HomeStack.Screen
         name="AllFeaturedScreen"
         component={AllFeaturedScreen}
@@ -80,6 +62,11 @@ function HomeTabNavigator() {
         name="ChildCategoryScreen"
         component={ChildCategoryScreen}
         options={({ route }: any) => ({ headerTitle: route?.params?.name || '' })}
+      />
+      <HomeStack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{ headerTitle: 'Search listings' }}
       />
     </HomeStack.Navigator>
   );

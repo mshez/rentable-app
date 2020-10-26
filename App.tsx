@@ -20,7 +20,7 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme} useDark={colorScheme === 'dark'}>
+    <ThemeProvider theme={theme}>
       <SafeAreaProvider>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />

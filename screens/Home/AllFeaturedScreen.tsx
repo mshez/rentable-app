@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { IListing } from '../../interface';
 import AdCard from '../../components/Common/AdCard';
-import { View } from '../../components/Themed';
 import useGetFeaturedListings from '../../hooks/api/listings/useGetFeaturedListings';
 
 const styles = StyleSheet.create({
@@ -42,7 +42,7 @@ export default function AllFeaturedListingsScreen() {
   );
 
   return (
-    <View style={styles.section}>
+    <SafeAreaView style={styles.section}>
       <FlatList
         initialNumToRender={8}
         showsVerticalScrollIndicator={false}
@@ -59,6 +59,6 @@ export default function AllFeaturedListingsScreen() {
         }}
         refreshing={isLoading}
       />
-    </View>
+    </SafeAreaView>
   );
 }

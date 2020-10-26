@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, FlatList, Alert, VirtualizedList } from 'react-native';
+import { StyleSheet, FlatList, Alert, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import useGetLatestListings from '../../hooks/api/listings/useGetLatestListings';
@@ -44,7 +44,7 @@ export default function AllWantedListingsScreen() {
   );
 
   return (
-    <View style={styles.section}>
+    <SafeAreaView style={styles.section}>
       <FlatList
         initialNumToRender={8}
         showsVerticalScrollIndicator={false}
@@ -61,6 +61,6 @@ export default function AllWantedListingsScreen() {
         }}
         refreshing={isLoading}
       />
-    </View>
+    </SafeAreaView>
   );
 }
