@@ -2037,6 +2037,18 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
+"@types/lodash.throttle@^4.1.6":
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.throttle/-/lodash.throttle-4.1.6.tgz#f5ba2c22244ee42ff6c2c49e614401a870c1009c"
+  integrity sha512-/UIH96i/sIRYGC60NoY72jGkCJtFN5KVPhEMMMTjol65effe1gPn0tycJqV5tlSwMTzX8FqzB5yAj0rfGHTPNg==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.163"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.163.tgz#6026f73c8267a0b7d41c7c8aadacfa2a5255774f"
+  integrity sha512-BeZM/FZaV53emqyHxn9L39Oz6XbHMBRLA1b1quROku48J/1kYYxPmVOJ/qSQheb81on4BI7H6QDo6bkUuRaDNQ==
+
 "@types/node@*":
   version "14.11.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.10.tgz#8c102aba13bf5253f35146affbf8b26275069bef"
@@ -3463,6 +3475,11 @@ depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
+
+dequal@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.2.tgz#85ca22025e3a87e65ef75a7a437b35284a7e319d"
+  integrity sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -8515,6 +8532,13 @@ svg-arc-to-cubic-bezier@^3.0.0:
   resolved "https://registry.yarnpkg.com/svg-arc-to-cubic-bezier/-/svg-arc-to-cubic-bezier-3.2.0.tgz#390c450035ae1c4a0104d90650304c3bc814abe6"
   integrity sha512-djbJ/vZKZO+gPoSDThGNpKDO+o+bAeA4XQKovvkNCqnIS2t+S4qnLAGQhyyrulhCFRl1WWzAp0wUDV8PpTVU3g==
 
+swr@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-0.3.6.tgz#b1d59439e5114fdf95bb408e1c628ff48f967aac"
+  integrity sha512-LHbX9vVQSW8Kgyr86zz2fVVKmmT13qxB61uXuUAg6NT4cGu6afzAzT2SVCGEh8pJAD2o8NTZMgclIUxIAbvk7Q==
+  dependencies:
+    dequal "2.0.2"
+
 symbol-observable@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
@@ -8943,6 +8967,11 @@ url-parse@^1.4.4:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+use-debounce@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-5.0.1.tgz#b11861bc63970bfc6fd8393a0a3cc3d7cb5944ce"
+  integrity sha512-YHzlVa7qKFRlrMpVRiStGWGE0lumwJiQPvsTMlatsIrck39ycyJkdf0npUYG5MJEVxaJQWwvpmePRYZb534upg==
 
 use-subscription@^1.0.0, use-subscription@^1.4.0:
   version "1.4.1"
